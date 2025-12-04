@@ -10,5 +10,31 @@ module.exports = {
     async listar(req, res){
         const dados = await Usuario.listar();
         res.json(dados);
+    },
+
+    async atualizar(req, res){
+        const {id} = req.params;
+        const {nome, senha} = req.body;
+        const atualizado = await Usuario.atualizar(id, nome, senha);
+    },
+
+    async deletar(req, res){
+        const {id} = req.params;
+        const deletado = await Usuario.deletar(id);
+        res.json(deletado);
+    },
+
+    async login(req, res){
+        const {nome, senha} = req.body;
+        const user = await Usuario.login(nome, senha);
+
+        if(!user){
+            return res.status(401).json({erro: "Credenciais inválidas!"});
+        }
+
+        res.json({
+            mensagem: "Login Ok! 👌",
+            usuario: user
+        });
     }
 };
