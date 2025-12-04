@@ -7,6 +7,7 @@ const rotas = express.Router();
 rotas.post("/", UsuarioController.criar);
 rotas.get("/", UsuarioController.listar);
 rotas.put("/:id", UsuarioController.atualizar);
-
+rotas.delete("/:id", UsuarioController.deletar);
+rotas.post("/login", UsuarioController.login);
 
 module.exports = rotas;
